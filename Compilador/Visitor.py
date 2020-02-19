@@ -1,58 +1,50 @@
 class Visitor():
   def visitSomaExp(self, somaExp):
     somaExp.exp1.accept(self)
-    print('+')
+    print('+', end = ' ')
     somaExp.exp2.accept(self)
 
-  def visitMultExp(self, mulExp):
+  def visitMulExp(self, mulExp):
     mulExp.exp1.accept(self)
-    print('*')
+    print('*', end = ' ')
     mulExp.exp2.accept(self)
 
   def visitPotExp(self, potExp):
     potExp.exp1.accept(self)
-    print('^')
+    print('^', end = ' ')
     potExp.exp2.accept(self)
 
   def visitCallExp(self, callExp):
     callExp.call.accept(self)
 
-  def visitAssignExp(self, assignExp):
-    assignExp.assign.accept(self)
-
   def visitNumExp(self, numExp):
-    numExp.num.accept(self)
-    print(num)
+    print(numExp.num, end = ' ')
 
   def visitIDExp(self, idExp):
-    idExp.Id.accept(self)
-    print(Id)
+    print(idExp.Id, end = ' ')
   
   def visitParamsCall(self,paramsCall):
-    paramsCall.Id.accept(self)
-    print(Id)
+    print(paramsCall.Id, end = ' ')
+    print('(', end=' ')
     paramsCall.Params.accept(self)
-    print(Params)
+    print(')', end=' ')
   
   def visitSimpleCall(self,simpleCall):
     simpleCall.Id.accept(self)
-    print(Id)
+    print('(', end=' ')
+    print(simpleCall.Id, end = ' ')
+
   
   def visitCompoundParams(self, compoundParams):
-    compoundParams.Id.accept(self)
-    print(Id)
-    compoundParams.Params.accept(self)
-    print(Params)
+    print(compoundParams.Id, end = ', ')
+    compoundParams.params.accept(self)
 
   def visitSingleParam(self,singleParam):
     singleParam.Id.accept(self)
-    print(Id)
+    print(singleParam.Id, end=' ')
 
   def visitAssignExp(self,assignExp):
     assignExp.Id.accept(self)
-    print(Id)
+    print(assignExp.Id, end=' ')
     assignExp.exp.accept(self)
-    print(exp)
-    
-
-    
+    print(assignExp.exp, end=' ')

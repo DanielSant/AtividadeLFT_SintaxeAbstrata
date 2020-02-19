@@ -1,5 +1,6 @@
 from abc import abstractmethod
 from abc import ABCMeta
+import Visitor
 
 class Exp(metaclass=ABCMeta):
     @abstractmethod
@@ -79,7 +80,7 @@ class CompoundParams(Params):
         self.Id = Id
         self.params = params
     def accept(self, Visitor):
-        Visitor.visitCompundParams(self)
+        Visitor.visitCompoundParams(self)
 
 class SingleParam(Params):
     def __init__(self,Id):
