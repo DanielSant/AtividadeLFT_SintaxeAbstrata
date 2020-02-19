@@ -59,7 +59,7 @@ class Call(metaclass=ABCMeta):
 class ParamsCall(Call):
     def __init__(self, Id, Params):
         self.Id = Id
-        self.Parms = Params
+        self.Params = Params
     def accept(self, Visitor):
         Visitor.visitParamsCall(self)
 

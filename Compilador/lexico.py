@@ -31,11 +31,11 @@ lexer = lex.lex()
 #
 # # Test it out
 data = '''
- 3 + 4 ^ 10 + 20 *2 = chamada(a, b, 3)
+ 3 + 4 ^ 10 + 20 * 2 = chamada(a, b, 3)
  '''
 lexer.input(data)
 
-# Tokenize
+Tokenize
 while True:
     tok = lexer.token()
     if not tok: 
