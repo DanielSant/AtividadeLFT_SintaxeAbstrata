@@ -25,13 +25,13 @@ class Visitor():
   
   def visitParamsCall(self,paramsCall):
     print(paramsCall.Id, end = ' ')
-    print('(', end=' ')
+    print('(', end =' ')
     paramsCall.Params.accept(self)
-    print(')', end=' ')
+    print(')', end =' ')
   
   def visitSimpleCall(self,simpleCall):
     simpleCall.Id.accept(self)
-    print('(', end=' ')
+    print('(', end =' ')
     print(simpleCall.Id, end = ' ')
 
   
@@ -41,10 +41,10 @@ class Visitor():
 
   def visitSingleParam(self,singleParam):
     singleParam.Id.accept(self)
-    print(singleParam.Id, end=' ')
+    print(singleParam.Id, end =' ')
 
   def visitAssignExp(self,assignExp):
     assignExp.Id.accept(self)
-    print(assignExp.Id, end=' ')
+    print(assignExp.Id, end =' ')
     assignExp.exp.accept(self)
-    print(assignExp.exp, end=' ')
+    print(assignExp.exp, end =' ')
