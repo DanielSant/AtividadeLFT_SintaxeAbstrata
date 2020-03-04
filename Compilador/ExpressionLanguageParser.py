@@ -60,7 +60,7 @@ def p_params(p):
 
 def p_assign(p):
     '''assign : ID IGUAL exp'''
-    p[0] = abstract.AssignExp(p[1], p[3])
+    p[0] = abstract.AssignC(p[1], p[3])
 
 parser = yacc.yacc()
 

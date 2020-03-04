@@ -17,6 +17,9 @@ class Visitor():
   def visitCallExp(self, callExp):
     callExp.call.accept(self)
 
+  def visitAssignExp(self, assignExp):
+    assignExp.assign.accept(self)
+
   def visitNumExp(self, numExp):
     print(numExp.num, end = ' ')
 
@@ -31,10 +34,9 @@ class Visitor():
   
   def visitSimpleCall(self,simpleCall):
     simpleCall.Id.accept(self)
-    print('(', end =' ')
+    print('(', end = ' ')
     print(simpleCall.Id, end = ' ')
 
-  
   def visitCompoundParams(self, compoundParams):
     print(compoundParams.Id, end = ', ')
     compoundParams.params.accept(self)
@@ -43,8 +45,7 @@ class Visitor():
     singleParam.Id.accept(self)
     print(singleParam.Id, end =' ')
 
-  def visitAssignExp(self,assignExp):
-    assignExp.Id.accept(self)
+  def visitAssignC(self,assignExp):
     print(assignExp.Id, end =' ')
+    print('=', end = ' ')
     assignExp.exp.accept(self)
-    print(assignExp.exp, end =' ')

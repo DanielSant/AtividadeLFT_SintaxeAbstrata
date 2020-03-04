@@ -93,11 +93,11 @@ class Assign(metaclass=ABCMeta):
     def accept(self, Visitor):
         pass
 
-class AssignExp(Assign):
+class AssignC(Assign):
     def __init__(self, Id, exp):
         self.Id = Id
         self.exp = exp
     def accept(self, Visitor):
-        Visitor.visitAssignExp(self)
+        Visitor.visitAssignC(self)
 
 

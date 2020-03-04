@@ -31,6 +31,6 @@ lexer = lex.lex()
 #
 # # Test it out
 data = '''
- 3 + 4 ^ 10 + 20 * 2 + chamada(a,b,c)
+ variavel = 25
 '''
 lexer.input(data)
