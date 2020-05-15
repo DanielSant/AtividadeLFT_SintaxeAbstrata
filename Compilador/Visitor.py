@@ -1,51 +1,122 @@
-class Visitor():
-  def visitSomaExp(self, somaExp):
-    somaExp.exp1.accept(self)
-    print('+', end = ' ')
-    somaExp.exp2.accept(self)
+from AbstractVisitor import AbstractVisitor
+# global tab
+tab = 0
 
-  def visitMulExp(self, mulExp):
-    mulExp.exp1.accept(self)
-    print('*', end = ' ')
-    mulExp.exp2.accept(self)
+def blank():
+    p = ''
+    for x in range(tab):
+        p = p + ' '
+    return p
 
-  def visitPotExp(self, potExp):
-    potExp.exp1.accept(self)
-    print('^', end = ' ')
-    potExp.exp2.accept(self)
+class Visitor(AbstractVisitor):
 
-  def visitCallExp(self, callExp):
-    callExp.call.accept(self)
+    def visitFuncDeclConcrete(self, funcDeclConcrete):
+        funcDeclConcrete.signature.accept(self)
+        funcDeclConcrete.body.accept(self)
 
-  def visitAssignExp(self, assignExp):
-    assignExp.assign.accept(self)
+    def visitSignatureConcrete(self, signatureConcrete):
+        print (blank(), signatureConcrete.type, ' ', end='', sep='')
+        print(signatureConcrete.id, '(', end = '', sep='')
+        if (signatureConcrete.sigParams != None):
+            signatureConcrete.sigParams.accept(self)
+        print(')', end = '')
 
-  def visitNumExp(self, numExp):
-    print(numExp.num, end = ' ')
+    def visitSingleSigParams(self, singleSigParams):
+        print(singleSigParams.type, ' ', end='', sep='')
+        print(singleSigParams.id, end='', sep='')
 
-  def visitIDExp(self, idExp):
-    print(idExp.Id, end = ' ')
-  
-  def visitParamsCall(self,paramsCall):
-    print(paramsCall.Id, end = ' ')
-    print('(', end =' ')
-    paramsCall.Params.accept(self)
-    print(')', end =' ')
-  
-  def visitSimpleCall(self,simpleCall):
-    simpleCall.Id.accept(self)
-    print('(', end = ' ')
-    print(simpleCall.Id, end = ' ')
+    def visitCompoundSigParams(self, compoundSigParams):
+        print(compoundSigParams.type, ' ', end='', sep='')
+        print(compoundSigParams.id, ', ', end='', sep='')
+        compoundSigParams.sigParams.accept(self)
 
-  def visitCompoundParams(self, compoundParams):
-    print(compoundParams.Id, end = ', ')
-    compoundParams.params.accept(self)
+    def visitBodyConcrete(self, bodyConcrete):
+        global tab
+        print ('{ ')
+        tab =  tab + 3
+        if (bodyConcrete.stms != None):
+            bodyConcrete.stms.accept(self)
+        tab =  tab - 3
+        print (blank(), '} ', sep='')
 
-  def visitSingleParam(self,singleParam):
-    singleParam.Id.accept(self)
-    print(singleParam.Id, end =' ')
+    def visitSingleStm(self, singleStm):
+        singleStm.stm.accept(self)
 
-  def visitAssignC(self,assignExp):
-    print(assignExp.Id, end =' ')
-    print('=', end = ' ')
-    assignExp.exp.accept(self)
+    def visitCompoundStm(self, compoundStm):
+        compoundStm.stm.accept(self)
+        compoundStm.stms.accept(self)
+
+    def visitStmExp(self, stmExp):
+        print(blank(),sep='',end='')
+        stmExp.exp.accept(self)
+        print('')
+
+    def visitStmWhile(self, stmWhile):
+        print (blank(), 'while (', end='', sep='')
+        stmWhile.exp.accept(self)
+        print (')', end='', sep='')
+        stmWhile.block.accept(self)
+
+    def visitStmReturn(self, stmReturn):
+        print (blank(), 'return ', end='', sep='')
+        stmReturn.exp.accept(self)
+        print (';')
+
+    def visitAssignExp(self, assignExp):
+        # print("visitAssignExp")
+        assignExp.exp1.accept(self)
+        print(' = ', end='')
+        assignExp.exp2.accept(self)
+
+    def visitSomaExp(self, somaExp):
+        # print("visitSomaExp")
+        somaExp.exp1.accept(self)
+        print(' + ', end='')
+        somaExp.exp2.accept(self)
+
+    def visitMulExp(self, mulExp):
+        # print("visitMulExp")
+        mulExp.exp1.accept(self)
+        print(' * ', end='')
+        mulExp.exp2.accept(self)
+
+    def visitPotExp(self, potExp):
+        # print("visitPotExp")
+        potExp.exp1.accept(self)
+        print(' ^ ', end='')
+        potExp.exp2.accept(self)
+
+    def visitCallExp(self, callExp):
+        # print("visitCallExp")
+        callExp.call.accept(self)
+
+    def visitNumExp(self, numExp):
+        # print("visitNumExp")
+        print(numExp.num, end='')
+
+    def visitIdExp(self, idExp):
+        # print("visitIdExp")
+        print(idExp.id, end='')
+
+    def visitBooleanExp(self, booleanExp):
+        print(booleanExp.boolValue, end='')
+
+    def visitParamsCall(self, paramsCall):
+        # print("visitParamsCall")
+        print(paramsCall.id, '(', end='', sep='')
+        paramsCall.params.accept(self)
+        print(')', end='')
+
+    def visitNoParamsCall(self, simpleCall):
+        # print("visitSimpleCall")
+        print(blank(), simpleCall.id, '()', end='', sep='')
+
+    def visitCompoundParams(self, compoundParams):
+        # print("visitCompoundParams")
+        compoundParams.exp.accept(self)
+        print(', ', end='')
+        compoundParams.params.accept(self)
+
+    def visitSingleParam(self, singleParam):
+        # print("visitSingleParam")
+        singleParam.exp.accept(self)
